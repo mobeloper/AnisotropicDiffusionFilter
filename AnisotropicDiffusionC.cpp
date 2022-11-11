@@ -289,7 +289,7 @@ void isoDiffusion(float* dst ,float* src, int w ,int h, float lambda, float sigm
 	float gcn, gcs, gce, gcw;
 	float tmp;
 
-	// ¿¬»êÀ» ½Ç¼öÇüÀ¸·Î ÇÏ±â À§ÇÏ¿© ½Ç¼öÇü 2Â÷¿ø ¹è¿­ µ¿Àû »ı¼º
+	// ì—°ì‚°ì„ ì‹¤ìˆ˜í˜•ìœ¼ë¡œ í•˜ê¸° ìœ„í•˜ì—¬ ì‹¤ìˆ˜í˜• 2ì°¨ì› ë°°ì—´ ë™ì  ìƒì„±
 	float** cpy = new float*[h];
 	for( i = 0 ; i < h ; i++ )
 	{
@@ -304,7 +304,7 @@ void isoDiffusion(float* dst ,float* src, int w ,int h, float lambda, float sigm
 		memset(buf[i], 0, sizeof(float)*w);
 	}
 
-	// ÀÔ·Â ¿µ»óÀÇ Á¤º¸¸¦ º¹»ç
+	// ì…ë ¥ ì˜ìƒì˜ ì •ë³´ë¥¼ ë³µì‚¬
 	for( y = 0 ; y < h ; y++ )
 	for( x = 0 ; x < w ; x++ )
 	{
@@ -331,19 +331,19 @@ void isoDiffusion(float* dst ,float* src, int w ,int h, float lambda, float sigm
 			buf[y][x] = cpy[y][x] + lambda*(gcn + gcs + gce + gcw);
 		}
 
-		// ¹öÆÛ º¹»ç
+		// ë²„í¼ ë³µì‚¬
 		for( y = 0 ; y < h ; y++ )
 			memcpy(cpy[y], buf[y], sizeof(float)*w);
 	}
 
-	// ÀÔ·Â ¿µ»óÀÇ °ª °»½Å
+	// ì…ë ¥ ì˜ìƒì˜ ê°’ ê°±ì‹ 
 	for( y = 0 ; y < h ; y++ )
 	for( x = 0 ; x < w ; x++ )
 	{
 		dst[y*w+x] = ((buf[y][x]+ 0.5f < 0) ? 0 : ((buf[y][x]+ 0.5f > 65535) ? 65535 : buf[y][x]+ 0.5f));
 	}
 
-	// µ¿Àû ÇÒ´çÇÑ ¸Ş¸ğ¸® ÇØÁ¦
+	// ë™ì  í• ë‹¹í•œ ë©”ëª¨ë¦¬ í•´ì œ
 	for( i = 0 ; i < h ; i++ )
 	{
 		delete [] buf[i];
@@ -422,6 +422,6 @@ void anIsoDiffusion2(float* dst ,float* src, int w ,int h, float dt, float thres
   3. // compute velocity
   4. // update image
 
-// ¸¶¹«¸®.
+// ë§ˆë¬´ë¦¬.
 */
 
